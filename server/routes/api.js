@@ -6,10 +6,20 @@ const Url = require('../models/url')
 /* GET api listing. */
 router.get('/', (req, res) => {
   res.send('api works');
+
 });
 
 router.get('/client', (req, res) => {
   res.send('get all clients')
+  Client.find({})
+    .then((clients) => {
+      console.log('clients are ', clients);
+      res.status(200).json(clients);
+    })
+    .catch((err) => {
+      console.log('what is the err?')
+      res.error(err);
+    })
 });
 
 router.get('/client/:id', (req, res) => {
@@ -43,7 +53,15 @@ router.post('/client/:id', (req, res) => {
 });
 
 router.get('/url', (req, res) => {
-  res.send('get all urls')
+  Url.find({})
+    .then((urls) => {
+      console.log('what are the urls? ')
+      res.status(200).json(urls);
+    })
+    .catch((err) => {
+      console.log('what is the err?')
+      res.error(err);
+    })
 });
 
 router.get('/url/:id', (req, res) => {
@@ -74,6 +92,26 @@ router.post('/url/', (req, res) => {
 
 router.post('/url/:id', (req, res) => {
   res.send('update route for url')
+});
+
+router.get('/url/create', (req, res) => {
+  const url1 = Url({
+    clientId: 1,
+    status: 'started',
+    priority: 1
+  })
+
+  const url2 = Url({
+    clientId: 1,
+    status: 'started',
+    priority: 2
+  })
+
+  const url3 = Url({
+    clientId: 1,
+    status: 'finished',
+    priority: 4
+  })
 });
 
 module.exports = router;
