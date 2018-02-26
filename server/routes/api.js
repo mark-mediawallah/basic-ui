@@ -6,11 +6,9 @@ const Url = require('../models/url')
 /* GET api listing. */
 router.get('/', (req, res) => {
   res.send('api works');
-
 });
 
 router.get('/client', (req, res) => {
-  res.send('get all clients')
   Client.find({})
     .then((clients) => {
       console.log('clients are ', clients);
@@ -22,12 +20,12 @@ router.get('/client', (req, res) => {
     })
 });
 
-router.get('/client/:id', (req, res) => {
-  console.log('what is req.params?', req.params)
-  res.status(200).send('get route for url by id ' + req.params.id)  
-});
+// router.get('/client/fetch/:id', (req, res) => {
+//   console.log('what is req.params?', req.params)
+//   res.status(200).send('get route for url by id ' + req.params.id)  
+// });
 
-router.post('/client/', (req, res) => {
+router.post('/client/new', (req, res) => {
   if (req && req.body) {
     console.log('what is req body? ', req.body);
     const newClient = Client({
@@ -48,9 +46,9 @@ router.post('/client/', (req, res) => {
   }
 });
 
-router.post('/client/:id', (req, res) => {
-  res.send('update route for client')
-});
+// router.post('/client/edit/:id', (req, res) => {
+//   res.send('update route for client')
+// });
 
 router.get('/url', (req, res) => {
   Url.find({})
@@ -64,11 +62,11 @@ router.get('/url', (req, res) => {
     })
 });
 
-router.get('/url/:id', (req, res) => {
-  res.status(200).send('get route for url by id ' + req.params.id)
-});
+// router.get('/url/fetch/:id', (req, res) => {
+//   res.status(200).send('get route for url by id ' + req.params.id)
+// });
 
-router.post('/url/', (req, res) => {
+router.post('/url/new', (req, res) => {
   if (req && req.body) {
     console.log('what is req body? ', req.body);
     const newUrl = Url({
@@ -90,9 +88,9 @@ router.post('/url/', (req, res) => {
   }
 });
 
-router.post('/url/:id', (req, res) => {
-  res.send('update route for url')
-});
+// router.post('/url/edit/:id', (req, res) => {
+//   res.send('update route for url')
+// });
 
 router.get('/url/create', (req, res) => {
   const url1 = Url({
@@ -112,6 +110,40 @@ router.get('/url/create', (req, res) => {
     status: 'finished',
     priority: 4
   })
+
+  const urls = [url1, url2, url3];
+
+  Url.collection.insert(urls)
+    .then( (newUrls) => {
+      console.log('what is the urls inserted ', newUrls)
+      res.status(200).json(newUrls);
+    })
 });
+
+router.get('/client/create', (req, res) => {
+  const client1 = Client({
+    name: 'mark',
+    password: 'mark'
+  })
+
+  const client2 = Client({
+    name: 'marco',
+    password: 'marco'
+  })
+
+  const client3 = Client({
+    name: 'marek',
+    password: 'marek'
+  })
+
+  const clients = [client1, client2, client3]
+
+  Client.collection.insert(clients)
+    .then( (newClients) => {
+      console.log('what is the clients inserted ', newClients)
+      res.status(200).json(newClients);
+    })
+  
+})
 
 module.exports = router;
