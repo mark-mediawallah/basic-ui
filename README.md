@@ -3,7 +3,7 @@
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.28.3.
 
 ## Development server
-Run `ng build --watch` then `node server.js`. Navigate to `http://localhost:3000/`. The app will automatically reload if you change any of the source files.
+Run `ng build --watch` then `node server.js`. Navigate to `http://localhost:3000/create`. The app will automatically reload if you change any of the source files.
 
 ## Database
 This project is running off a local MongoDB instance. In order for the app to work, you must install MongoDB, and
