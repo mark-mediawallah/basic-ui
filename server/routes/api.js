@@ -3,11 +3,14 @@ const router = express.Router();
 const Client = require('../models/client');
 const Url = require('../models/url')
 
-/* GET api listing. */
+
+/* Default API Route */
 router.get('/', (req, res) => {
-  res.send('api works');
+  res.status(200).json('api works');
 });
 
+
+/* Get ALL Clients */
 router.get('/client', (req, res) => {
   Client.find({})
     .then((clients) => {
@@ -20,11 +23,13 @@ router.get('/client', (req, res) => {
     })
 });
 
+/* Get Client by Id */
 // router.get('/client/fetch/:id', (req, res) => {
 //   console.log('what is req.params?', req.params)
 //   res.status(200).send('get route for url by id ' + req.params.id)  
 // });
 
+/* Create a New Client */
 router.post('/client/new', (req, res) => {
   if (req && req.body) {
     console.log('what is req body? ', req.body);
@@ -46,10 +51,12 @@ router.post('/client/new', (req, res) => {
   }
 });
 
+/* Update a Client by Id */
 // router.post('/client/edit/:id', (req, res) => {
 //   res.send('update route for client')
 // });
 
+/* Get All Urls */
 router.get('/url', (req, res) => {
   Url.find({})
     .then((urls) => {
@@ -62,10 +69,12 @@ router.get('/url', (req, res) => {
     })
 });
 
+/* Get Url by Id */
 // router.get('/url/fetch/:id', (req, res) => {
 //   res.status(200).send('get route for url by id ' + req.params.id)
 // });
 
+/* Create a New Url */
 router.post('/url/new', (req, res) => {
   if (req && req.body) {
     console.log('what is req body? ', req.body);
@@ -88,10 +97,12 @@ router.post('/url/new', (req, res) => {
   }
 });
 
+/* Update a Url by Id */
 // router.post('/url/edit/:id', (req, res) => {
 //   res.send('update route for url')
 // });
 
+/* Temporary Seed Routes */
 router.get('/url/create', (req, res) => {
   const url1 = Url({
     clientId: 1,
@@ -143,7 +154,19 @@ router.get('/client/create', (req, res) => {
       console.log('what is the clients inserted ', newClients)
       res.status(200).json(newClients);
     })
-  
+})
+
+/* Temporary Drop Routes */
+router.get('/client/drop', (req, res) => {
+  Client.collection.drop().then( (result) => {
+    res.status(200).json(result)
+  })
+})
+
+router.get('/url/drop', (req, res) => {
+  Url.collection.drop().then( (result) => {
+    res.status(200).json(result)
+  })
 })
 
 module.exports = router;

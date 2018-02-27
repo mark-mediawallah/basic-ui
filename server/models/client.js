@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 // create a schema
 var clientSchema = new Schema({
   name: String,
+  type: String,
   password: {type: String, required: true}
 });
 
