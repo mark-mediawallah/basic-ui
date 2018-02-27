@@ -1,9 +1,13 @@
-# MeanApp
+# Config Tool
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.28.3.
 
 ## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `ng build --watch` then `node server.js`. Navigate to `http://localhost:3000/`. The app will automatically reload if you change any of the source files.
+
+## Database
+This project is running off a local MongoDB instance. In order for the app to work, you must install MongoDB, and
+have an MongoDB server instance running.
 
 ## Code scaffolding
 
